@@ -23,8 +23,12 @@ polen
 ######creamos el factor tratamiento#########
 trats <- gl(3,10,label=c("aumentado","disminuido","control"))
 trats
+##### realizamos el analisis de varianza
 modelo.andeva.polen <- aov(polen~trats)
 summary(modelo.andeva.polen)
+#####graficamos los resultados
 boxplot(polen~trats)
+#####realizamos la prueba post-hoc (tukey-test)
 TukeyHSD(modelo.andeva.polen)
+######graficamos la prueba post-hoc
 plot(TukeyHSD(modelo.andeva.polen))
