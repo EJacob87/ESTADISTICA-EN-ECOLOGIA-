@@ -1,0 +1,30 @@
+######LEEEMOS LA BASE DE DATOS#####
+eritrocitos <- read.csv("eritrocitos.csv", head=T)
+#####solicitamos los primeros datos de la tabla
+head(eritrocitos)
+#####solicitamos la estructura de la tabla
+str(eritrocitos)
+#####hacemos el analisis de varianza
+unavia_eritrocitos <- aov(eritrocitos$eritrocitos~eritrocitos$Tratamiento)
+summary(unavia_eritrocitos)
+#####hacemos la prueba post hoc
+lsd_results <- LSD.test(unavia_eritrocitos, "Tratamiento", p.adj = "none")
+lsd_results
+###### graficamos la prueba post-hoc
+plot(lsd_results)
+
+
+#####Damos datos para la variable polen asociado a un nivel del factor######
+aum <- c(42, 48, 55, 42, 55, 38, 42, 49, 44, 54)
+dis <- c(26, 29, 27, 32, 30, 28, 29, 28, 32, 31)
+ctl <- c(39, 34, 39, 40, 38, 36, 36, 40, 39, 37)
+polen <- c(aum,dis,ctl)
+polen
+######creamos el factor tratamiento#########
+trats <- gl(3,10,label=c("aumentado","disminuido","control"))
+trats
+modelo.andeva.polen <- aov(polen~trats)
+summary(modelo.andeva.polen)
+boxplot(polen~trats)
+TukeyHSD(modelo.andeva.polen)
+plot(TukeyHSD(modelo.andeva.polen))
