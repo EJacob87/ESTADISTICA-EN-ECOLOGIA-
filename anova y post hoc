@@ -32,3 +32,7 @@ boxplot(polen~trats)
 TukeyHSD(modelo.andeva.polen)
 ######graficamos la prueba post-hoc
 plot(TukeyHSD(modelo.andeva.polen))
+#####Que tal la prueba lsd######
+lsd_flores<- LSD.test(modelo.andeva.polen,"trats", p.adj= "none")
+lsd_flores 
+plot(lsd_flores)
